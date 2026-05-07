@@ -1,7 +1,5 @@
-torch==2.2.0+cpu
-torchvision==0.17.0+cpu
+torch
+torchvision
 --extra-index-url https://download.pytorch.org/whl/cpu
 timm
-gradio==4.44.0
 Pillow
-setuptools
