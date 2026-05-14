@@ -1,5 +1,5 @@
 ---
-title: Art Style Classifier
+title: Art Style + Artist Classifier
 emoji: 🎨
 colorFrom: blue
 colorTo: purple
@@ -10,5 +10,5 @@ pinned: false
 python_version: "3.12"
 ---
 
-# Art Style Classifier
-Upload a photo of your artwork to identify which art style it most resembles.
+# Art Style + Artist Classifier
+Upload a photo of your artwork to identify which art style and artist's work it most resembles.
