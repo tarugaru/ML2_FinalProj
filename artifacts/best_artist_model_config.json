@@ -1,0 +1,6 @@
+{
+  "num_classes": 50,
+  "backbone": "efficientnet_b0",
+  "best_epoch": 8,
+  "best_val_loss": 1.0987417586147785
+}
