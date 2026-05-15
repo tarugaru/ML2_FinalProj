@@ -41,28 +41,39 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406],
                          std=[0.229, 0.224, 0.225]),
 ])
-
 def predict(image):
     if image is None:
-        return "No image provided."
+        return "<p>No image provided.</p>"
     pil_image = Image.fromarray(image).convert("RGB")
     tensor = transform(pil_image).unsqueeze(0)
     with torch.no_grad():
         outputs = model(tensor)
         probs = torch.softmax(outputs, dim=1)[0]
     top_probs, top_idxs = torch.topk(probs, 3)
-    lines = []
+    
     medals = ["🥇", "🥈", "🥉"]
+    colors = ["#4f46e5", "#7c3aed", "#a855f7"]
+    html = "<div style='font-family:sans-serif;padding:10px'>"
     for i, (p, idx) in enumerate(zip(top_probs, top_idxs)):
         style = idx_to_style[idx.item()]
-        confidence = float(p.item()) * 100
-        lines.append(f"{medals[i]}  {style}  —  {confidence:.1f}%")
-    return "\n".join(lines)
+        pct = float(p.item()) * 100
+        html += f"""
+        <div style='margin-bottom:16px'>
+            <div style='display:flex;justify-content:space-between;margin-bottom:4px'>
+                <span style='font-weight:600'>{medals[i]} {style}</span>
+                <span style='color:#666'>{pct:.1f}%</span>
+            </div>
+            <div style='background:#e5e7eb;border-radius:999px;height:12px'>
+                <div style='background:{colors[i]};width:{pct:.1f}%;height:12px;border-radius:999px;transition:width 0.5s'></div>
+            </div>
+        </div>"""
+    html += "</div>"
+    return html
 
 demo = gr.Interface(
     fn=predict,
     inputs=gr.Image(label="Upload your artwork"),
-    outputs=gr.Text(label="Art Style Predictions"),
+    outputs=gr.HTML(label="Art Style Predictions"),
     title="Art Style Classifier",
     description="Upload a photo of your artwork to identify which art style it most resembles.",
 )
