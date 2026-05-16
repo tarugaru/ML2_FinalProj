@@ -101,8 +101,8 @@ demo = gr.Interface(
         gr.HTML(label="Art Style Predictions"),
         gr.HTML(label="Artist Predictions")
     ],
-    title="Art Style + Artist Classifier",
-    description="Upload a photo of your artwork to identify which art style and artist's work it most resembles.",
+    title="🎨 AI Art Detective: Style & Artist Explorer",
+    description="Ever wondered what your art says about you? 🎨 Whether you're a student, professional, or just exploring your creativity, upload your artwork and discover its style — and which famous artists it resembles most!",
 )
 
 demo.launch(server_name="0.0.0.0", server_port=7860)
